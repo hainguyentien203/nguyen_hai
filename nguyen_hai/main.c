@@ -1,14 +1,18 @@
 #include <stdio.h>
 void main() {
-	float a = 0;
-	float b = 0;
-	printf(" Nhap gia tri cua a: ");
+	float a;
+	printf("Nhap vao so diem trung binh cua cac hoc sinh a: ");
 	scanf_s("%f", &a);
-	printf(" Nhap gia tri cua b: ");
-	scanf_s("%f", &b);
-	float max = a;
-	if (b >= max) {
-		printf("Gia tri lon nhat la b= %f",b);
+	if (a >= 8.0) {
+		printf("Hoc sinh nay xep loai gioi.\n");
 	}
-	else printf("Gia tri lon nhat la a = %f",a);
+	else if (a >= 6.5) {
+		printf("Hoc sinh nay xep loai kha.\n");
+	}
+	else if (a >= 5.0) {
+		printf("Hoc sinh nay xep loai trung binh.\n");
+	}
+	else {
+		printf("Hoc sinh nay xep loai yeu.\n");
+	}
 }
