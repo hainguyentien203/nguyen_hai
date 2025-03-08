@@ -6,6 +6,7 @@ void main() {
 	int solannhapsai=0;
 	double sotien=0;
 	int giaodich;
+	double taikhoangoc = 10000;
 
 	while (buoc != 5) {	
 		switch (buoc) {
@@ -24,13 +25,14 @@ void main() {
 				}
 			}
 				else {
+				printf("So du trong tai khoan la : %.2f\n", taikhoangoc);
 				buoc = 2;
 			} break;
 
 		case 2:
 			printf("Nhap so tien can rut: ");
 			scanf_s("%lf", &sotien);
-			if (sotien > 10000) {
+			if (sotien > taikhoangoc) {
 				printf("So du tai khoan khong du vui long nhap lai.\n");
 				buoc = 2;
 			}
@@ -40,6 +42,7 @@ void main() {
 
 		case 3:
 			printf("So tien quy khach da rut la: %.2f\n", sotien);
+			taikhoangoc = taikhoangoc - sotien;
 			buoc = 4;
 			break;
 
