@@ -25,7 +25,7 @@ void main() {
 				}
 			}
 				else {
-				printf("So du trong tai khoan la : %.2f\n", taikhoangoc);
+				printf("So du trong tai khoan la : %.3f\n", taikhoangoc);
 				buoc = 2;
 			} break;
 
