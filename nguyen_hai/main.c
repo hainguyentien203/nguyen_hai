@@ -1,35 +1,62 @@
 #include <stdio.h>
 void main() {
-	float luong;
-	float thue;
-	printf("So tien luong nhan duoc 1 thang la: ");
-	scanf_s("%f", &luong);
-	while (luong < 0) {
-		printf("Nhap lai so tien luong: ");
-		scanf_s("%f", &luong);
+	int buoc = 1;
+	int matkhau = 1234;
+	int matkhaunguoidung=0;
+	int solannhapsai=0;
+	double sotien=0;
+	int giaodich;
+
+	while (buoc != 5) {	
+		switch (buoc) {
+		case 1:
+			printf("Nhap mat khau nguoi dung: ");
+			scanf_s("%d", &matkhaunguoidung);
+			if (matkhaunguoidung != matkhau) {
+				solannhapsai++;
+				if (solannhapsai >= 3) {
+					printf("Nhap sai qua 3 lan giao dich ket thuc.\n");
+					buoc = 5;
+				}
+				else {
+					printf("Vui long nhap lai mat khau!\n");
+					buoc = 1;
+				}
+			}
+				else {
+				buoc = 2;
+			} break;
+
+		case 2:
+			printf("Nhap so tien can rut: ");
+			scanf_s("%lf", &sotien);
+			if (sotien > 10000) {
+				printf("So du tai khoan khong du vui long nhap lai.\n");
+				buoc = 2;
+			}
+			else {
+				buoc = 3;
+			} break;
+
+		case 3:
+			printf("So tien quy khach da rut la: %.2f\n", sotien);
+			buoc = 4;
+			break;
+
+		case 4:
+			printf("Quy khach co muon tiep tuc giao dich khong?\n");
+			printf("Nhap 1 de tiep tuc giao dich, 2 de tat giao dich: ");
+			scanf_s("%d", &giaodich);
+			while (giaodich != 1 && giaodich != 2) {
+				printf("Vui long chon 1 hoac 2 de hoan tat giao dich!\n");
+				scanf_s("%d", &giaodich);
+			}
+			if (giaodich == 1) {
+				buoc = 2;
+			}
+			else buoc = 5;
+			break;
+		}
 	}
-	if (luong <= 5) {
-		thue = 0.05 * luong;
-		printf("So tien thue phai dong la: %f", thue);
-	}
-	else if (luong <= 10) {
-		thue = 0.1 * luong - 0.25;
-		printf("So tien thue phai tra la: %f", thue);
-	}
-	else if (luong <= 18) {
-		thue = 0.15 * luong - 0.75;
-		printf("So tien thue phai tra la: %f", thue);
-	}
-	else if (luong <= 32) {
-		thue = 0.2 * luong - 1.65;
-		printf("So tien thue phai tra la: %f", thue);
-	}
-	else if (luong <= 52) {
-		thue = 0.25 * luong - 3.25; 
-		printf("So tien thue phai tra la: %f", thue);
-	}
-	else {
-		thue = 0.35 * luong - 9.85;
-		printf("So tien thue phai tra la: %f", thue);
-	}
+	printf("Giao dich ket thuc!\n");
 }
