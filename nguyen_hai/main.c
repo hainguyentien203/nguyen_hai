@@ -1,35 +1,35 @@
 #include <stdio.h>
 void main() {
-	int kwh;
-	float sotien;
-	printf("Nhap vao so KWh gia dinh su dung: ");
-	scanf_s("%d", &kwh);
-	while (kwh < 0) {
-		printf("Nhap lai so KWh gia dinh su dung: ");
-		scanf_s("%d", &kwh);
+	float luong;
+	float thue;
+	printf("So tien luong nhan duoc 1 thang la: ");
+	scanf_s("%f", &luong);
+	while (luong < 0) {
+		printf("Nhap lai so tien luong: ");
+		scanf_s("%f", &luong);
 	}
-	if (kwh <= 50) {
-		sotien = 1.678 * kwh;
-		printf("So tien ma gia dinh phai tra la: %f", sotien);
+	if (luong <= 5) {
+		thue = 0.05 * luong;
+		printf("So tien thue phai dong la: %f", thue);
 	}
-	else if (kwh <= 100) {
-		sotien = 1.678 * 50+(kwh-50)*1.734;
-		printf("So tien ma gia dinh phai tra la: %f", sotien);
+	else if (luong <= 10) {
+		thue = 0.1 * luong - 0.25;
+		printf("So tien thue phai tra la: %f", thue);
 	}
-	else if (kwh <= 200) {
-		sotien = 1.678 * 50 + 50 * 1.734 + (kwh-100)*2.014;
-		printf("So tien ma gia dinh phai tra la: %f", sotien);
+	else if (luong <= 18) {
+		thue = 0.15 * luong - 0.75;
+		printf("So tien thue phai tra la: %f", thue);
 	}
-	else if (kwh <= 300) {
-		sotien = 1.678 * 50 + 50 * 1.734 + 100 * 2.014 + (kwh-200)*2.536;
-		printf("So tien ma gia dinh phai tra la: %f", sotien);
+	else if (luong <= 32) {
+		thue = 0.2 * luong - 1.65;
+		printf("So tien thue phai tra la: %f", thue);
 	}
-	else if (kwh <= 400) {
-		sotien = 1.678 * 50 + 50 * 1.734 + 100 * 2.014 + 100 * 2.536 + (kwh - 300) * 2.834;
-		printf("So tien ma gia dinh phai tra la: %f", sotien);
+	else if (luong <= 52) {
+		thue = 0.25 * luong - 3.25; 
+		printf("So tien thue phai tra la: %f", thue);
 	}
 	else {
-		sotien = 1.678 * 50 + 50 * 1.734 + 100 * 2.014 + 100 * 2.536 + 100 * 2.834 + (kwh - 400) * 2.927;
-		printf("So tien ma gia dinh phai tra la: %f", sotien);
+		thue = 0.35 * luong - 9.85;
+		printf("So tien thue phai tra la: %f", thue);
 	}
 }
