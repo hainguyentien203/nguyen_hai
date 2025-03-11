@@ -1,10 +1,11 @@
 #include <stdio.h>
 void main() {
-	int i;
-	int kq;
-	for (int i = 1; i <= 10; i++) 
+	for (int i = 1; i <= 10; i++)
 	{
-		kq = 2 * i;
-		printf("voi i = %d thi kq= %d\n", i, kq);
+		for (int j = 2; j <= 10; j++)
+		{
+			printf("%dx%d=%d\t", j, i, i * j);
+		}
+		printf("\n");
 	}
 }
