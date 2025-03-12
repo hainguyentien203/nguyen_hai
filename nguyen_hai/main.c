@@ -1,22 +1,16 @@
 ﻿#include <stdio.h>
 #include <math.h>
-int min(int A, int B) {
-	int min = A;
-	if (B < min) min = B;
-	return min;
-}
-int UCLN(int A, int B) {
-	for (int i = min(A, B); i > 0; i--) {
-		if (A % i == 0 && B % i == 0)
-			return i;
+int main(){
+	int a, b;
+	double f_x=0;
+	printf("Nhap gia tri cua so nguyen a: ");
+	scanf_s("%d", &a);
+	printf("Nhap gia tri cua so nguyen b: ");
+	scanf_s("%d", &b);
+	double h = (double)fabs(a - b) / 1000;
+	for (int i = 0; i <= 1000; i++) {
+		f_x = f_x + (pow(a + i * h, 2) + pow(a + (1 + i) * h, 2)) * h / 2;
 	}
-}
-void main(){
-	int A, B,c;
-	printf("Nhap gia tri cua so nguyen A: ");
-	scanf_s("%d", &A);
-	printf("Nhap gia tri cua so nguyen B: ");
-	scanf_s("%d", &B);
-	printf("UCLN giua %d va %d la : %d", A, B, UCLN (A,B));
+	printf("Gia tri cua tich phan f(x)=x^2 voi tan so mau 1000 lan la : %3f", f_x);
 }
 
