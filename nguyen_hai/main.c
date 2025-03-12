@@ -1,16 +1,17 @@
 ﻿#include <stdio.h>
-//int gt(int n) {
-//	if (n == 1) return 1;
-//	else return gt(n - 1) * n;
-//}
-void main() {
+void main(){
 	int n;
-	int gt=1;
-	printf("Nhap vao mot so tu nhien n: ");
-	scanf_s("%d", &n);
-	for (int i = 1; i <= n; i++) {
-		gt = gt * i;
+	int dem=0;
+	printf("Nhap vao mot so n: ");
+	scanf_s ("%d", &n);
+	while (n != 0) {
+		dem++;
+		printf("Vui long nhap lai: ");
+		scanf_s("%d", &n);
+		if (dem >= 4) {
+			printf("ban da nhap sai qua so lan cho phep!");
+				break;
+		}
 	}
-	printf("Giai thua cua so vua nhap la: %d", gt);
 }
 
