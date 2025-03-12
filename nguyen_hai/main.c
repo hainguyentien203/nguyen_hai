@@ -1,16 +1,16 @@
 ﻿#include <stdio.h>
-
+//int gt(int n) {
+//	if (n == 1) return 1;
+//	else return gt(n - 1) * n;
+//}
 void main() {
-	float n;
-	float tong=0;
-	printf("Nhap vao so nguyen n: ");
-	scanf_s("%f", &n);
-	for (int i = 0; i <= n; i++)
-	{
-		if (i % 2 == 0) {
-			tong = tong + i;
-		}
+	int n;
+	int gt=1;
+	printf("Nhap vao mot so tu nhien n: ");
+	scanf_s("%d", &n);
+	for (int i = 1; i <= n; i++) {
+		gt = gt * i;
 	}
-	printf("Tong cua cac so chan tu 1 den n la: %f", tong);
+	printf("Giai thua cua so vua nhap la: %d", gt);
 }
 
