@@ -1,30 +1,19 @@
 ﻿#include <stdio.h>
 #include <math.h>
-#include <conio.h>
+#include <string.h>
 void main() {
-	int a[10] = { 0 };
-	int tong = 0;
-	for (int i = 0; i < 10; i++) {
-		printf("a[%d] = ", i);
-		scanf_s("%d", &a[i]);
-	}
-	printf("Mang vua nhap la: ");
-	for (int i = 0; i < 10; i++) {
-		printf("%d ", a[i]);
-		tong = tong + a[i];
-	}
-	printf("tong = %d\n", tong);
-	int max = a[0];
-	for (int i = 1; i < 10; i++) {
-		if (a[i] > max) {
-			max = a[i];
+	char str[] = "Xin chao";
+	int dem = 0;
+	int demkitu = 0;
+	for (int i = 0; i < strlen(str); i++) {
+		if (str[i] >= 'A' && str[i] <= 'Z') {
+			dem++;
 		}
 	}
-	printf("So lon nhat trong mang la %d\n ", max);
-	for (int i = 0; i < 10; i++) {
-		if (a[i] == max) {
-			printf("So lon nhat trong mang tai vi tri %d \n ", i);
+		while (str[demkitu] != 0) {
+			demkitu++;
 		}
-	}
+	printf("Co %d ki tu \n", demkitu);
+	printf("Co %d ki tu hoa\n", dem);
 }
 
