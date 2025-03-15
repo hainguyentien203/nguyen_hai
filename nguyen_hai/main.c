@@ -10,17 +10,18 @@ void nhap(char S[100]) {
 void xuat(char S[100]) {
 	printf("Chuoi vua nhap la: %s\n",S);
 }
-void dem(char S[100]) {
-	int dem_kt = 0;
-	while (S[dem_kt] != 0) {
-		dem_kt++;
+void dem_cach (char S[100]) {
+	int d = 0;
+	for (int i=0;i<strlen(S);i++)
+	{	if (S[i]== ' ')
+		d++;
 	}
-	printf("Co %d ki tu trong chuoi.", dem_kt);
+	printf("Co %d ki tu cach trong chuoi.", d);
 }
 void main() {
 	char S[100] = { 0 };
 	nhap(S);
 	xuat(S);
-	dem(S);
+	dem_cach(S);
 }
 
