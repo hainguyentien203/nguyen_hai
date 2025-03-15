@@ -9,20 +9,22 @@ void nhap(char S[100]) {
 	} while (strcmp(S,"") == 0);
 }
 void xuat(char S[100]) {
-	printf("Chuoi vua nhap la: %s\n",S);
+	printf("%s\n",S);
 }
-void dem (char S[100]) {
+void in1 (char S[100]) {
 	int d = 0;
 	for (int i = 0; i < strlen(S); i++) {
-		if (S[i] != ' ' && (S[i + 1] == ' ' || S[i + 1] == '\0'))
-			d++;
+		if (S[i] != ' ' && (i == 0 || S[i - 1] == ' '))
+			S[i] = toupper(S[i]);
 	}
-	printf("chuoi co %d ki tu.", d);
 }
 void main() {
 	char S[100] = { 0 };
 	nhap(S);
+	printf("Chuoi vua nhap la: ");
 	xuat(S);
-	dem(S);
+	printf("Ham sau khi in hoa chu cai dau tien la: ");
+	in1(S);
+	xuat(S);
 }
 
