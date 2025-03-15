@@ -11,11 +11,16 @@ void nhap(char S[100]) {
 void xuat(char S[100]) {
 	printf("%s\n",S);
 }
-void in1 (char S[100]) {
-	int d = 0;
+void tim_c(char S[100]) {
+	int dem = 0;
 	for (int i = 0; i < strlen(S); i++) {
-		if (S[i] != ' ' && (i == 0 || S[i - 1] == ' '))
-			S[i] = toupper(S[i]);
+		if (S[i] == 'c') {
+			dem++;
+			printf("ky tu c trong chuoi duoc tim thay tai vi tri %ld (dia chi: %p)\n", i, &S[i]);
+		}
+	} 
+	if (dem == 0){
+		printf("Khong co ky tu c nao duoc tim thay trong chuoi.");
 	}
 }
 void main() {
@@ -23,8 +28,6 @@ void main() {
 	nhap(S);
 	printf("Chuoi vua nhap la: ");
 	xuat(S);
-	printf("Ham sau khi in hoa chu cai dau tien la: ");
-	in1(S);
-	xuat(S);
+	tim_c(S);
 }
 
