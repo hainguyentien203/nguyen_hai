@@ -13,20 +13,14 @@ void xuat(int a[], int n) {
 	}
 	printf("\n");
 }
-void nt (int a[], int n) {
-	int nt = 0;
+void max (int a[], int n) {
+	int max = a[0];
 	for (int i = 0; i < n; i++) {
-		int dem = 0;
-		for (int j = 0; j <= i; j++) {
-			if (a[i] % a[j] == 0) 
-				dem++;
+		if (a[i] > max) {
+			max = a[i];
 		}
-		if (dem == 2) {
-			printf(" %d ", a[i]);
-			nt++;
-		}
-}
-		if (nt==0) printf("Khong co so nguyen to nao trong mang!");
+	}
+	printf("Gia tri lon nhat trong mang la: %d", max);
 }
 void main()
 {
@@ -39,8 +33,7 @@ void main()
 	nhap(a, n);
 	printf("Mang vua nhap la: \n");
 	xuat(a, n);
-	printf("Cac so nguyen to trong mang la: ");
-	nt(a, n);
+	max(a, n);
 	printf("\n");
 }
 
