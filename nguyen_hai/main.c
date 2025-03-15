@@ -4,9 +4,6 @@
 
 void main()
 {
-	int tong = 0;
-	int dem=0;
-	float tbc = 0;
 	int a[5] = { 0 };
 	printf("Nhap cac phan tu cua mang: \n");
 	for (int i = 0; i < 5; i++) {
@@ -17,16 +14,17 @@ void main()
 	for (int i = 0; i < 5; i++) {
 		printf(" a[%d] = %d ",i, a[i]);
 	}
+	int dem = 0;
+	int max = a[0];
 	printf("\n");
 	for (int i = 0; i < 5; i++) {
-		if (a[i] % 2 != 0) {
-			dem++;
-			tong = tong + a[i];
+		if (a[i] >= max) {
+			max = a[i];
 		}
 	}
-	if (dem > 0) {
-		printf("Trung binh cong cac so le trong mang la: %f\n", tbc = (float)tong / dem);
+	for (int i = 0; i < 5; i++) {
+		if (a[i]==max)
+		printf("So lon nhat trong mang la %d, dung tai vi tri: %d\n",max, i);
 	}
-	else printf("Khong co phan tu le trong mang.");
 }
 
