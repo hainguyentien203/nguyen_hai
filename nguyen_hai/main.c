@@ -1,19 +1,45 @@
-﻿#include <stdio.h>
+﻿#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <conio.h>
 #include <math.h>
-#include <string.h>
-void main() {
-	char str[] = "Xin chao";
-	int dem = 0;
-	int demkitu = 0;
-	for (int i = 0; i < strlen(str); i++) {
-		if (str[i] >= 'A' && str[i] <= 'Z') {
-			dem++;
-		}
+
+void main()
+{
+	int n = 0;
+	int don_vi = 0;
+	printf("Nhap vao so nguyen n can doc: ");
+	scanf("%d", &n);
+	while (n / (int)pow(10, don_vi))
+	{
+		don_vi++;
 	}
-		while (str[demkitu] != 0) {
-			demkitu++;
+	printf("don vi: %d\n", don_vi);
+	for (int i = don_vi - 1; i >= 0; i--)
+	{
+		int tam = n / (int)pow(10, i);
+		printf("%d", tam);
+		switch (i)
+		{
+		case 6:
+			printf(" ty ");
+			break;
+		case 5:
+			printf(" tram ");
+			break;
+		case 4:
+			printf(" muoi ");
+			break;
+		case 3:
+			printf(" ngan ");
+			break;
+		case 2:
+			printf(" tram ");
+			break;
+		case 1:
+			printf(" muoi ");
+			break;
 		}
-	printf("Co %d ki tu \n", demkitu);
-	printf("Co %d ki tu hoa\n", dem);
+		n = n - tam * pow(10, i);
+	}
 }
 
