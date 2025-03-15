@@ -1,47 +1,26 @@
 ﻿#include <stdio.h>
-#include <conio.h>
-#include <math.h>
-void nhap(int a[], int n) {
-	for (int i = 0; i < n; i++) {
-		printf("a[%d] = ", i);
-		scanf_s("%d", &a[i]);
-	}
-}
-void xuat(int a[], int n) {
-	for (int i = 0; i < n; i++) {
-		printf(" a[%d] = %d ", i, a[i]);
-	}
-	printf("\n");
-}
-void swap (int a[], int i, int j) {
-	int tg = a[i];
-	a[i] = a[j];
-	a[j] = tg;
-}
-void sap_xep(int a[], int n) {
-	for (int i = 0; i < n - 1; i++) {
-		for (int j = i + 1; j < n; j++) {
-			if (a[i] > a[j]) {
-				swap(a, i, j);
-			}
-		}
-	}
-}
-void main()
-{
-	int a[30] = { 0 };
-	int n = 0;
+#include <string.h>
+void nhap(char S[100]) {
 	do {
-		printf("Nhap so phan tu cua mang : n = ");
-		scanf_s("%d", &n);
-	} while (n <= 0 || n >= 30);
-	nhap(a, n);
-	printf("Mang vua nhap la: \n");
-	xuat(a, n);
-	sap_xep(a, n);
-	printf("Mang sau khi sap xep theo thu tu tang dan la: ");
-	xuat(a, n);
-	printf("\n");
+		printf("Nhap vao mot chuoi ky tu (khac rong): ");
+		fflush(stdin);
+		gets(S);
+	} while (strcmp(S,"") == 0);
 }
-
+void xuat(char S[100]) {
+	printf("Chuoi vua nhap la: %s\n",S);
+}
+void dem(char S[100]) {
+	int dem_kt = 0;
+	while (S[dem_kt] != 0) {
+		dem_kt++;
+	}
+	printf("Co %d ki tu trong chuoi.", dem_kt);
+}
+void main() {
+	char S[100] = { 0 };
+	nhap(S);
+	xuat(S);
+	dem(S);
+}
 
