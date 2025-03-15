@@ -1,45 +1,32 @@
-﻿#define _CRT_SECURE_NO_WARNINGS
-#include <stdio.h>
+﻿#include <stdio.h>
 #include <conio.h>
 #include <math.h>
 
 void main()
 {
-	int n = 0;
-	int don_vi = 0;
-	printf("Nhap vao so nguyen n can doc: ");
-	scanf("%d", &n);
-	while (n / (int)pow(10, don_vi))
-	{
-		don_vi++;
+	int tong = 0;
+	int dem=0;
+	float tbc = 0;
+	int a[5] = { 0 };
+	printf("Nhap cac phan tu cua mang: \n");
+	for (int i = 0; i < 5; i++) {
+		printf("a[%d] = ", i);
+		scanf_s("%d", &a[i]);
 	}
-	printf("don vi: %d\n", don_vi);
-	for (int i = don_vi - 1; i >= 0; i--)
-	{
-		int tam = n / (int)pow(10, i);
-		printf("%d", tam);
-		switch (i)
-		{
-		case 6:
-			printf(" ty ");
-			break;
-		case 5:
-			printf(" tram ");
-			break;
-		case 4:
-			printf(" muoi ");
-			break;
-		case 3:
-			printf(" ngan ");
-			break;
-		case 2:
-			printf(" tram ");
-			break;
-		case 1:
-			printf(" muoi ");
-			break;
+	printf("Mang vua nhap la: \n");
+	for (int i = 0; i < 5; i++) {
+		printf(" a[%d] = %d ",i, a[i]);
+	}
+	printf("\n");
+	for (int i = 0; i < 5; i++) {
+		if (a[i] % 2 != 0) {
+			dem++;
+			tong = tong + a[i];
 		}
-		n = n - tam * pow(10, i);
 	}
+	if (dem > 0) {
+		printf("Trung binh cong cac so le trong mang la: %f\n", tbc = (float)tong / dem);
+	}
+	else printf("Khong co phan tu le trong mang.");
 }
 
