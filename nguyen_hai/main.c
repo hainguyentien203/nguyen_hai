@@ -13,11 +13,11 @@ void xuat(int a[], int n) {
 	}
 	printf("\n");
 }
-void thay_am (int a[], int n) {
+void pt_le(int a[], int n) {
 	for (int i = 0; i < n; i++) {
-		if (a[i] < 0) {
-			a[i] = 0;
-		}
+		if (a[i] % 2 != 0)
+			printf(" %d ", a[i]);
+		else ("Khong co phan tu le nao trong mang.");
 	}
 }
 void main()
@@ -31,9 +31,9 @@ void main()
 	nhap(a, n);
 	printf("Mang vua nhap la: \n");
 	xuat(a, n);
-	thay_am(a, n);
-	printf("Mang sau khi thay the phan tu am bang 0 la: \n");
-	xuat(a, n);
+	printf("Cac gia tri le trong mang la: ");
+	pt_le(a, n);
+	printf("\n");
 }
 
 
