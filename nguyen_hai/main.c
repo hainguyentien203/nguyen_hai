@@ -18,6 +18,15 @@ void swap (int a[], int i, int j) {
 	a[i] = a[j];
 	a[j] = tg;
 }
+void sap_xep(int a[], int n) {
+	for (int i = 0; i < n - 1; i++) {
+		for (int j = i + 1; j < n; j++) {
+			if (a[i] > a[j]) {
+				swap(a, i, j);
+			}
+		}
+	}
+}
 void main()
 {
 	int a[30] = { 0 };
@@ -29,15 +38,8 @@ void main()
 	nhap(a, n);
 	printf("Mang vua nhap la: \n");
 	xuat(a, n);
-	int vt1 = 0;
-	int vt2 = 0;
-	do {
-		printf("Nhap vi tri 2 so nguyen muon hoan vi: ");
-		scanf_s("%d", &vt1);
-		scanf_s("%d", &vt2);
-	} while (vt1 < 0 && vt1 >= n && vt2 < 0 && vt2 >= n);
-	swap(a, vt1, vt2);
-	printf("Mang sau khi hoan vi la: ");
+	sap_xep(a, n);
+	printf("Mang sau khi sap xep theo thu tu tang dan la: ");
 	xuat(a, n);
 	printf("\n");
 }
