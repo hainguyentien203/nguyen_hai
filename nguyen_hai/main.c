@@ -1,6 +1,7 @@
 ﻿#include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include "math.h"
 char* nhap(char S[]) {
 	do {
 		printf("Nhap vao mot chuoi ky tu (khac rong): ");
