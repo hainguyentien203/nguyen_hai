@@ -26,6 +26,15 @@ hs_t tinh_toan(hs_t* mang, int sl) {
         case 3: printf("Yeu\n"); break;
         }
 }
+hs_t tim_hs_diem_tb_maxt(hs_t * mang, int sl) {
+      hs_t max_hs = mang[0]; 
+      for (int i = 1; i < sl; i++) { 
+      if (mang[i].diem_tb > max_hs.diem_tb) {
+          max_hs = mang[i]; 
+            }
+        }
+        return max_hs;
+    }
 void main() {
     hs_t mang_hs[]{
         {"Nguyen van A",18,8.0,6.5},
