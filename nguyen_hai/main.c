@@ -18,7 +18,13 @@ hs_t tinh_toan(hs_t* mang, int sl) {
         if (mang[i].diem_tb >= 5) { mang[i].xep_loai = 2; }
         else mang[i].xep_loai = 3;
     }
-
+    for (int i = 0; i < sl; i++) {
+        switch (mang[i].xep_loai) {
+        case 0: printf("Xuat Sac\n"); break;
+        case 1: printf("Gioi\n"); break;
+        case 2: printf("Trung Binh\n"); break;
+        case 3: printf("Yeu\n"); break;
+        }
 }
 void main() {
     hs_t mang_hs[]{
