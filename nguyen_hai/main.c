@@ -1,64 +1,76 @@
 ﻿#include <stdio.h>
 #include <string.h>
-
 typedef struct {
-    char* ten;
-    int tuoi;
-    float diem_toan;
-    float diem_van;
-    float diem_tb;
-    int xep_loai;
-} hs_t;
-void tinh_toan(hs_t* mang, int n) {
-    for (int i = 0; i < n; i++) {
-        mang[i].diem_tb = (mang[i].diem_toan + mang[i].diem_van) / 2;
-        if (mang[i].diem_tb >= 8.0) mang[i].xep_loai = 0;
-        else if (mang[i].diem_tb >= 6.5) { mang[i].xep_loai = 1; }
-        else if (mang[i].diem_tb >= 5.0) { mang[i].xep_loai = 2; }
-        else mang[i].xep_loai = 3;
-    }
-    for (int i = 0; i < n; i++) {
-        switch (mang[i].xep_loai) {
-        case 0: printf("%s: Diem tb: %.2f - Gioi\n", mang[i].ten,mang[i].diem_tb); break;
-        case 1: printf("%s: Diem tb: %.2f - Kha\n", mang[i].ten, mang[i].diem_tb); break;
-        case 2: printf("%s: Diem tb: %.2f - Trung Binh\n", mang[i].ten, mang[i].diem_tb); break;
-        case 3: printf("%s: Diem tb: %.2f - Yeu\n", mang[i].ten, mang[i].diem_tb); break;
-        }
-    }
+	int tu;
+	int mau;
+}phan_so;
+phan_so nhan_ps(phan_so A, phan_so B) {
+	phan_so kq;
+	kq.tu = A.tu * B.tu;
+	kq.mau = A.mau * B.mau;
+	return kq;
 }
-hs_t tim_hs_diem_tb_max(hs_t * mang, int n) {
-      hs_t tb_max = mang[0]; 
-      for (int i = 1; i < n; i++) { 
-      if (mang[i].diem_tb > tb_max.diem_tb) {
-          tb_max = mang[i]; 
-            }
-        }
-        return tb_max;
-    }
-void sap_xep(hs_t* mang, int n) {
-    for (int i = 0; i < n-1; i++) {
-        for (int j=i+1;j<n;j++)
-        if (mang[j].diem_tb > mang[i].diem_tb) {
-            hs_t tg = mang[i];
-            mang[i] = mang[j];
-            mang[j] = tg;
-       }
-    }
+phan_so chia_ps(phan_so A, phan_so B) {
+	phan_so kq;
+	if (A.tu == 0) {
+		printf("Khong the chia.\n");
+		kq.tu = 0;
+		kq.mau = 0;
+	}
+	else {
+		kq.tu = A.tu * B.mau;
+		kq.mau = A.mau * B.tu;
+	}
+	return kq;
+}
+phan_so cong_ps(phan_so A, phan_so B) {
+	phan_so kq;
+	kq.mau = A.mau * B.mau;
+	kq.tu = A.tu * B.mau + B.tu * A.mau;
+	return kq;
+}
+phan_so tru_ps(phan_so A, phan_so B) {
+	phan_so kq;
+	kq.mau = A.mau * B.mau;
+	kq.tu = A.tu * B.mau - B.tu * A.mau;
+	return kq;
+}
+int ucln(int a, int b) {
+	while (b != 0) {
+		int r = a % b;
+		a = b;
+		b = r;
+	}
+	return a;
+}
+phan_so rut_gon(phan_so A) {
+	phan_so kq;
+	int uoc_chung = ucln(A.tu, A.mau);
+	kq.tu = A.tu / uoc_chung;
+	kq.mau = A.mau / uoc_chung;
+	return kq;
 }
 void main() {
-    hs_t mang_hs[]={
-        {.ten="Nguyen van A",.tuoi=18,.diem_toan=8.0,.diem_van=6.5},
-        {.ten = "Nguyen van B",.tuoi = 18,.diem_toan = 9.0,.diem_van=8.5},
-        {.ten = "Nguyen van C",.tuoi = 18,.diem_toan = 7.5,.diem_van=6.0},
-        {.ten = "Nguyen van D",.tuoi = 18,.diem_toan = 6.5,.diem_van=4.5},
-    };
-    int n = sizeof(mang_hs) / sizeof(mang_hs[0]);
-    tinh_toan(mang_hs, n);
-    hs_t tb_max= tim_hs_diem_tb_max(mang_hs, n);
-    printf("\n");
-    printf("Hoc sinh co diem tb cao nhat la : %s\n", tb_max.ten);
-    printf("\n");
-    sap_xep(mang_hs, n);
-    printf("Danh sach hoc sinh sau khi sap xep la :\n");
-    tinh_toan(mang_hs, n);
+	phan_so A = { 1,3 };
+	phan_so B = { 2,3 };
+	printf("Phan so vua nhap la: %d/%d\n", A.tu, A.mau);
+	printf("Phan so vua nhap la: %d/%d\n", B.tu, B.mau);
+	printf("\n");
+	phan_so kq_nhan = nhan_ps(A, B);
+	printf("Kq nhan 2 phan so tren la: %d/%d\n", kq_nhan.tu, kq_nhan.mau);
+	phan_so kq_chia = chia_ps(A, B);
+	printf("Kq chia 2 phan so tren la: %d/%d\n", kq_chia.tu, kq_chia.mau);
+	phan_so kq_cong = cong_ps(A, B);
+	printf("Kq cong 2 phan so tren la: %d/%d\n", kq_cong.tu, kq_cong.mau);
+	phan_so kq_tru = tru_ps(A, B);
+	printf("Kq tru 2 phan so tren la: %d/%d\n", kq_tru.tu, kq_tru.mau);
+	printf("\n");
+	phan_so kq_rutgon1 = rut_gon(kq_nhan);
+	printf("Kq nhan sau khi rut gon la: %d/%d\n", kq_rutgon1.tu, kq_rutgon1.mau);
+	phan_so kq_rutgon2 = rut_gon(kq_chia);
+	printf("Kq chia sau khi rut gon la: %d/%d\n", kq_rutgon2.tu, kq_rutgon2.mau);
+	phan_so kq_rutgon3 = rut_gon(kq_cong);
+	printf("Kq cong sau khi rut gon la: %d/%d\n", kq_rutgon3.tu, kq_rutgon3.mau);
+	phan_so kq_rutgon4 = rut_gon(kq_tru);
+	printf("Kq tru sau khi rut gon la: %d/%d\n", kq_rutgon4.tu, kq_rutgon4.mau);
 }
