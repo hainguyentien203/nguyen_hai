@@ -6,6 +6,7 @@ typedef struct {
 	void* previous_node;
 }node_t;
 typedef struct {
+	node_t* head;
 	node_t* last_node;
 	int len;
 }linked_list_t;
@@ -18,18 +19,26 @@ int Getlen(linked_list_t* ll) {
 }
 void Add(linked_list_t* ll, int val) {
 	node_t* node = malloc(sizeof(node_t));
+	if (node == NULL) {
+		printf("Khong the cap bo nho cho node.\n");
+		return;
+	}
 	node->value = val;
 	if (ll->len > 0) {
 		node->previous_node = ll->last_node;
 	}
 	else {
-		node->previous_node = 0;
+		node->previous_node = NULL;
 	}
 	ll->last_node = node;
 	ll->len++;
 }
 void Insert(linked_list_t* ll, int val, int index) {
 	node_t* node = malloc(sizeof(node_t));
+	if (node == NULL) {
+		printf("Khong the cap bo nho cho node.\n");
+		return;
+	}
 	if (index < 0 || index>ll->len) {
 		printf("Vi tri khong hop le\n");
 		return;
@@ -106,7 +115,7 @@ int GetValueIndex(linked_list_t* ll, int index) {
 		return;
 	}
 	node_t* temp = ll->last_node;
-	for (int i = ll->len; i >= index; i--) {
+	for (int i = ll->len-1; i >= index; i--) {
 		temp = temp->previous_node;
 	}
 	return temp->value;
@@ -128,6 +137,14 @@ void main() {
 	Add(&ll, 3);
 	Add(&ll, 4);
 	Add(&ll, 5);
+	Insert(&ll, 9, 3);
+	printf("Vi tri chua gia tri 4 la: %d\n", Search(&ll, 2));
 	int x = GetValueIndex(&ll, 3);
-	printf("Gia tri cua node thu 3 la: %d", x);
+	printf("Gia tri cua node thu 3 la: %d\n", x);
+	Remove(&ll);
+	printf("Gia tri cua node cuoi la: %d\n", ll.last_node ? ll.last_node->value : -1);
+	RemoveIndex(&ll, 3);
+	int y = GetValueIndex(&ll, 3);
+	printf("Gia tri cua node thu 3 la: %d\n", y);
+
 }
