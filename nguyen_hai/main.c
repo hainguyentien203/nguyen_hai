@@ -1,150 +1,58 @@
 ﻿#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+typedef enum {
+	NAM,
+	NU
+}gioi_tinh;
+char* convert_gioi_tinh [] = { "Nam","Nu" };
+typedef enum {
+	GIOI,
+	KHA,
+	TB,
+	YEU
+}loai_t;
 typedef struct {
-	int value;
-	void* previous_node;
-}node_t;
-typedef struct {
-	node_t* head;
-	node_t* last_node;
-	int len;
-}linked_list_t;
-void Create(linked_list_t* ll) {
-	ll->last_node = NULL;
-	ll->len = 0;
-}
-int Getlen(linked_list_t* ll) {
-	return ll->len;
-}
-void Add(linked_list_t* ll, int val) {
-	node_t* node = malloc(sizeof(node_t));
-	if (node == NULL) {
-		printf("Khong the cap bo nho cho node.\n");
-		return;
-	}
-	node->value = val;
-	if (ll->len > 0) {
-		node->previous_node = ll->last_node;
-	}
-	else {
-		node->previous_node = NULL;
-	}
-	ll->last_node = node;
-	ll->len++;
-}
-void Insert(linked_list_t* ll, int val, int index) {
-	node_t* node = malloc(sizeof(node_t));
-	if (node == NULL) {
-		printf("Khong the cap bo nho cho node.\n");
-		return;
-	}
-	if (index < 0 || index>ll->len) {
-		printf("Vi tri khong hop le\n");
-		return;
-	}
-	node->value = val;
-	if (index == 0) {
-		node->previous_node = NULL;
-		ll->last_node = node;
-	}
-	else {
-		node_t* temp = ll->last_node;
-		for (int i = 0; i < index-1; i++) {
-			temp = temp->previous_node;
+	char* ten;
+	int tuoi;
+	gioi_tinh gioi_tinh;
+	float diem_toan;
+	float diem_van;
+	loai_t xep_loai;
+}hoc_sinh_t;
+void xep_loai (hoc_sinh_t* hs, int sl) {
+	float tb = 0;
+	for (int i = 0; i < sl; i++) {
+		tb = (hs[i].diem_toan + hs[i].diem_van) / 2;
+		if (tb > 8.0) {
+			hs[i].xep_loai = GIOI;
 		}
-		node->previous_node = temp->previous_node;
-		temp->previous_node = node;
-	}
-	ll->len++;
-}
-void Remove(linked_list_t* ll) {
-	if (ll->len == 0) {
-		printf("Danh sach rong.\n");
-		return;
-	}
-	node_t* temp = ll->last_node;
-	ll->last_node = temp->previous_node;
-	free(temp);
-	ll->len--;
-}
-void RemoveIndex(linked_list_t* ll, int index) {
-	if (index < 0 || index >= ll->len) {
-		printf("Vi tri khong hop le.\n");
-		return;
-	}
-	if (index == 0) {
-		node_t* temp = ll->last_node;
-		ll->last_node = temp->previous_node;
-		free(temp);
-	}
-	else {
-		node_t* temp = ll->last_node;
-		for (int i = 0; i < index - 1; i++) {
-			temp = temp->previous_node;
+		else if (tb >= 6.5) {
+			hs[i].xep_loai = KHA;
 		}
-		node_t* node_remove = temp->previous_node;
-		temp->previous_node = node_remove->previous_node;
-		free(node_remove);
-	}
-	ll->len--;
-}
-int Search(linked_list_t* ll, int val) {
-	node_t* temp = ll->last_node;
-	int index = 0;
-	while (temp != NULL) {
-		if (temp->value == val) {
-			return index;
+		else if (tb >= 5.0) {
+			hs[i].xep_loai = TB;
 		}
-		temp = temp->previous_node;
-		index++;
+		else hs[i].xep_loai = YEU;
 	}
-	return -1;
 }
-int GetValue(linked_list_t* ll) {
-	if (ll->len == 0) {
-		printf("Danh sach rong.\n");
-		return;
+void in_ds(hoc_sinh_t* hs, int sl) {
+	for (int i = 0; i < sl; i++) {
+		printf("Ten : %s\n", hs[i].ten);
+		printf("Tuoi : %d\n", hs[i].tuoi);
+		printf("Gioi tinh : %s\n", convert_gioi_tinh[hs[i].gioi_tinh]);
+		printf("Diem toan : %d\n", hs[i].diem_toan);
+		printf("Diem vam : %d\n", hs[i].diem_van);
+		printf("Xep loai : %d\n", hs[i].xep_loai);
 	}
-	node_t* temp = ll->last_node;
-	return temp->value;
 }
-int GetValueIndex(linked_list_t* ll, int index) {
-	if (index < 0 || index >= ll->len) {
-		printf("Vi tri khong hop le.\n");
-		return;
-	}
-	node_t* temp = ll->last_node;
-	for (int i = ll->len-1; i >= index; i--) {
-		temp = temp->previous_node;
-	}
-	return temp->value;
-}
-void DeleteAll(linked_list_t* ll) {
-	node_t* temp = ll->last_node;
-	while (temp != NULL) {
-		node_t* temp1 = temp;
-		temp = temp->previous_node;
-		free(temp1);
-	}
-	ll->last_node = NULL;
-	ll->len = 0;
-}
-void main() {
-	linked_list_t ll = { 0 };
-	Add(&ll, 1);
-	Add(&ll, 2);
-	Add(&ll, 3);
-	Add(&ll, 4);
-	Add(&ll, 5);
-	Insert(&ll, 9, 3);
-	printf("Vi tri chua gia tri 4 la: %d\n", Search(&ll, 2));
-	int x = GetValueIndex(&ll, 3);
-	printf("Gia tri cua node thu 3 la: %d\n", x);
-	Remove(&ll);
-	printf("Gia tri cua node cuoi la: %d\n", ll.last_node ? ll.last_node->value : -1);
-	RemoveIndex(&ll, 3);
-	int y = GetValueIndex(&ll, 3);
-	printf("Gia tri cua node thu 3 la: %d\n", y);
 
+void main() {
+	hoc_sinh_t hs[] = {
+		{"Nguyen Van A",18, NAM , 8.5, 9.6},
+		{"Nguyen Van B",18, NU , 7.0, 9.0},
+		{"Nguyen Van C",18, NAM , 6.5, 7.6},
+	};
+	xep_loai(hs, 3);
+	in_ds(hs, 3);
 }
