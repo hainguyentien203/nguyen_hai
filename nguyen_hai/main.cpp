@@ -12,49 +12,71 @@ public:
 		size = num_item;
 	}
 	int& operator[](int index) {
+		if (index < 0 || index >= size) {
+			throw std::out_of_range("Chi so khong hop le.\n");
+		}
 		return data[index];
 	}
-	/*int operator[](int index) const {
-		return data[index];
-	}*/
-	// viet method them mot doi tuong vao trong mang o vi tri cuoi cung
-	void push_back(int val) {
-		// cap phat vung nho moi lon hon vung nho cu
-		int* newtemp = (int*)malloc((size + 1) * sizeof(int));
-		if (newtemp == NULL) {
-			throw std::runtime_error("Khong the malloc\n");
+	void push_back(int value) {
+		int* newdata = (int*) malloc((size + 1) * sizeof(int));
+		if (newdata == NULL) {
+			throw std::runtime_error("Khong the malloc. \n");
 		}
-		// copy du lieu tu vung nho cu sang vung nho moi va set gia tri cua doi tuong 
 		for (int i = 0; i < size; i++) {
-			newtemp[i] = data[i];
+			newdata[i] = data[i];
 		}
-		newtemp[size] = val;
-		// huy vung nho cu
+		newdata[size] = value;
 		free(data);
-		// cap nhat dia chi cua vung nho moi vao con tro data
-		data = newtemp;
-		// cap nhat lai gia tri cua bien size
+		data = newdata;
 		size++;
+	}
+	int pop_back(int index) {
+		if (index <0 || index >= size) {
+			throw std::out_of_range("Chi so khong hop le. \n");
+		}
+		int remove_value = data[index];
+		int new_size = size - 1;
+		int* new_data = nullptr;
+		if (new_size > 0) {
+			new_data = (int*)malloc(new_size * sizeof(int));
+			if (new_data == NULL) {
+				throw std::runtime_error("Khong the malloc. \n");
+			}
+			for (int i = 0, j = 0; i < size; ++i) {
+				if (i == index) continue;
+				if (j >= new_size) {
+					free(new_data);
+					throw std::runtime_error("Chi so vuot qua gioi han bo nho. \n");
+				}
+					new_data[j++] = data[i];
+			}
+		}
+		free(data);
+		data = new_data;
+		size = new_size;
+		return remove_value;
 	}
 	~mang() {
 		free(data);
 	}
 };
-int tong( mang &x) {
+int tong(mang &a) {
 	int sum = 0;
-	for (int i = 0; i < x.size; i++) {
-		sum = sum + x[i];
+	for (int i = 0; i < a.size ; i++) {
+		sum = sum + a[i];
 	}
 	return sum;
 }
 int main() {
 	mang arr(3);
 	arr[0] = 1;
-	arr[1] = 4;
-	arr[2] = 2;
+	arr[1] = 2;
+	arr[2] = 3;
+	arr.push_back(4);
 	arr.push_back(5);
-	int x = tong(arr);
-	printf("Tong mang x = %d\n", x);
+	printf("Tong array = %d\n", tong(arr));
+	printf("Phan tu bi xoa: %d\n", arr.pop_back(0));
+	printf("Tong sau khi xoa: %d\n", tong(arr));
 	return 0;
 }
 
