@@ -3,80 +3,97 @@
 #include <math.h>
 #include <malloc.h>
 #include <iostream>
-class mang {
+#include <string>
+#include <vector>
+#include <algorithm>
+using namespace std;
+enum gioitinh_e {
+	NAM,
+	NU
+};
+class thongtincanhan {
+	string ten;
+	int tuoi;
+	gioitinh_e gioitinh;
 public:
-	int* data;
-	int size;
-	mang(int num_item) {
-		data = (int*)malloc(num_item * sizeof(int));
-		size = num_item;
+	void set_ten(string _ten) {
+		ten = _ten;
 	}
-	int& operator[](int index) {
-		if (index < 0 || index >= size) {
-			throw std::out_of_range("Chi so khong hop le.\n");
-		}
-		return data[index];
+	string get_ten() {
+		return ten;
 	}
-	void push_back(int value) {
-		int* newdata = (int*) malloc((size + 1) * sizeof(int));
-		if (newdata == NULL) {
-			throw std::runtime_error("Khong the malloc. \n");
-		}
-		for (int i = 0; i < size; i++) {
-			newdata[i] = data[i];
-		}
-		newdata[size] = value;
-		free(data);
-		data = newdata;
-		size++;
+	void set_tuoi(int _tuoi) {
+		tuoi = _tuoi;
 	}
-	int pop_back(int index) {
-		if (index <0 || index >= size) {
-			throw std::out_of_range("Chi so khong hop le. \n");
-		}
-		int remove_value = data[index];
-		int new_size = size - 1;
-		int* new_data = nullptr;
-		if (new_size > 0) {
-			new_data = (int*)malloc(new_size * sizeof(int));
-			if (new_data == NULL) {
-				throw std::runtime_error("Khong the malloc. \n");
-			}
-			for (int i = 0, j = 0; i < size; ++i) {
-				if (i == index) continue;
-				if (j >= new_size) {
-					free(new_data);
-					throw std::runtime_error("Chi so vuot qua gioi han bo nho. \n");
-				}
-					new_data[j++] = data[i];
-			}
-		}
-		free(data);
-		data = new_data;
-		size = new_size;
-		return remove_value;
+	int get_tuoi() {
+		return tuoi;
 	}
-	~mang() {
-		free(data);
+	void set_gioitinh(gioitinh_e gt) {
+		gioitinh = gt;
+	}
+	string get_gioitinh() {
+		return gioitinh == NAM ? "Nam" : "Nu";
 	}
 };
-int tong(mang &a) {
-	int sum = 0;
-	for (int i = 0; i < a.size ; i++) {
-		sum = sum + a[i];
+class hocsinh : public thongtincanhan {
+	float diemtoan;
+	float diemvan;
+public: 
+	void set_diemtoan(float _diemtoan) {
+		diemtoan = _diemtoan;
 	}
-	return sum;
-}
+	float get_diemtoan() {
+		return diemtoan;
+	}
+	void set_diemvan(float _diemvan) {
+		diemvan = _diemvan;
+	}
+	float get_diemvan() {
+		return diemvan;
+	}
+	float diemtrungbinh() {
+		return (diemtoan + diemvan) / 2;
+	}
+	hocsinh(string ten, int tuoi, gioitinh_e gioitinh, float diem_toan, float diem_van) {
+		set_ten(ten);
+		set_tuoi(tuoi);
+		set_gioitinh(gioitinh);
+		diemtoan = diem_toan;
+		diemvan = diem_van;
+	}
+};
+class giaovien : public thongtincanhan {
+	float bacluong;
+public:
+	void set_bacluong(float bac_luong) {
+		bacluong = bac_luong;
+	}
+	float get_bacluong() {
+		return bacluong;
+	}
+};
 int main() {
-	mang arr(3);
-	arr[0] = 1;
-	arr[1] = 2;
-	arr[2] = 3;
-	arr.push_back(4);
-	arr.push_back(5);
-	printf("Tong array = %d\n", tong(arr));
-	printf("Phan tu bi xoa: %d\n", arr.pop_back(0));
-	printf("Tong sau khi xoa: %d\n", tong(arr));
+	//thongtincanhan A;
+	//A.set_ten("Nguyen Van A");
+	//A.set_tuoi(18);
+	//A.set_gioitinh(NAM);
+	////cout << "ten: " << A.get_ten() << endl;
+	vector<hocsinh> A = {
+		{"Nguyen Van A", 18, NAM , 8 , 8},
+		{"Nguyen Thi B", 18, NU , 8 , 10},
+		{"Nguyen Van C", 18, NAM , 8 , 9},
+		{"Nguyen Van D", 18, NAM , 7 , 8},
+		{"Nguyen Van E", 18, NAM , 10 , 10}
+	};
+	sort(A.begin(), A.end(), [](hocsinh A,hocsinh B) {
+		if (A.diemtrungbinh() > B.diemtrungbinh())
+			return true;
+		else return false;
+		});
+	cout << "3 hoc sinh co diem trung binh cao nhat la: " << endl;
+	cout << A[0].get_ten() <<" : diem trung binh la: "<< A[0].diemtrungbinh() << endl;
+	cout << A[1].get_ten() << " : diem trung binh la: " << A[1].diemtrungbinh() << endl;
+	cout << A[2].get_ten() << " : diem trung binh la: " << A[2].diemtrungbinh() << endl;
 	return 0;
 }
 
